@@ -1,0 +1,80 @@
+{
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@constants": [
+        "src/constants/index"
+      ],
+      "@decorators": [
+        "src/common/decorators/index"
+      ],
+      "@filters": [
+        "src/common/filters/index"
+      ],
+      "@guards": [
+        "src/common/guards/index"
+      ],
+      "@interceptors": [
+        "src/common/interceptors/index"
+      ],
+      "@middlewares": [
+        "src/common/middlewares/index"
+      ],
+      "@pipes": [
+        "src/common/pipes/index"
+      ],
+      "@templates": [
+        "src/common/templates/index"
+      ],
+      "@controllers": [
+        "src/controllers/index"
+      ],
+      "@modules": [
+        "src/modules/index"
+      ],
+      "@dtos": [
+        "src/dtos/index"
+      ],
+      "@models": [
+        "src/models/index"
+      ],
+      "@queries": [
+        "src/queries/index"
+      ],
+      "@utils": [
+        "src/utils/index"
+      ],
+      "@validators": [
+        "src/validators/index"
+      ],
+      "@libs": [
+        "src/libs/index"
+      ],
+      "@config": [
+        "src/config/env"
+      ]
+    }
+  }
+}
