@@ -4,7 +4,7 @@ import { Offer, OfferRedeem } from "@models";
 import { HttpStatus, Injectable } from "@nestjs/common";
 import { CustomError } from "@utils";
 import { CreateOfferDTO, UpdateOfferDTO } from "@validators";
-import * as moment from "moment";
+import moment from "moment";
 import sequelize, {
   and,
   cast,
@@ -18,7 +18,7 @@ import sequelize, {
 
 @Injectable()
 export class OfferService {
-  constructor() {}
+  constructor() { }
 
   async createOffer(offerData: CreateOfferDTO, transaction?: Transaction) {
     const {

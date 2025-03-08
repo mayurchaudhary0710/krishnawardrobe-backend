@@ -13,4 +13,3 @@ export * from "./crypto";
 export * from "./firebaseAdmin";
 export * from "./pagination";
 export * from "./arrayHelper";
-export * from "./weekDaysHelper";

@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import * as moment from "moment";
+import moment from "moment";
 import { SESSIONTYPE } from "@constants";
 
 const addBookingValidator = yup.object({

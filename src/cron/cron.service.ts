@@ -5,7 +5,7 @@ import {
 import { Injectable } from "@nestjs/common";
 import { Cron } from "@nestjs/schedule";
 import { InjectConnection } from "@nestjs/sequelize";
-import * as moment from "moment";
+import moment from "moment";
 import { Op, Sequelize } from "sequelize";
 
 @Injectable()
