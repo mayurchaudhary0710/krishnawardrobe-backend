@@ -1,4 +1,4 @@
-import { ROLE } from '@constants';
+import { ROLE } from '../constants/enums';
 import { DataTypes, QueryInterface } from 'sequelize';
 
 export const up = async ({ context }: { context: QueryInterface }) => {

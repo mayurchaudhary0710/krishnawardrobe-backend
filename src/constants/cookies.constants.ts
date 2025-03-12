@@ -24,4 +24,4 @@ export {
   cookiesConfig,
   accessTokenExpire,
   refresTokenExpire,
-}
+};

@@ -34,7 +34,7 @@ export class OffersController {
     private readonly offerService: OfferService,
     @InjectConnection()
     private readonly _sequelize: Sequelize,
-  ) { }
+  ) {}
 
   @Post()
   async createOffer(

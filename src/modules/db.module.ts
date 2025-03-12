@@ -39,8 +39,11 @@ const database = ENV.DB.DATABASE;
         allModels.Offer,
         allModels.OfferRedeem,
         allModels.CronLog,
+        allModels.Policy,
+        allModels.SystemSetting,
+        allModels.Category,
       ],
     }),
   ],
 })
-export class DBModule {}
+export class DBModule { }

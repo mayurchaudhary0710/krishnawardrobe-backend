@@ -22,7 +22,7 @@ import {
   cookiesConfig,
   REFRESH_TOKEN,
   refresTokenExpire,
-} from 'src/constants/cookies.constants';
+} from '@constants';
 import { IAdminLoginDTO } from '@validators';
 import { forgetPasswordUrl } from 'src/constants/auth.constant';
 
@@ -135,45 +135,24 @@ export class AuthService {
       );
     }
 
-    const isTokenAlreadyCreated = await SecurityTokens.findOne({
-      where: {
+    let token: string = '';
+    const tokenExpireTime = moment()
+      .add(this.forgetPasswordMinutes, 'm')
+      .toDate();
+    token = encryptData(
+      {
         userId: user.id,
       },
-      attributes: ['id', 'userId', 'count', 'token'],
-    });
-    let token: string = '';
-    if (isTokenAlreadyCreated) {
-      if (
-        isTokenAlreadyCreated.count >= this.maxResetPasswordRequest &&
-        moment().diff(moment(isTokenAlreadyCreated.createdAt), 'hours') < 2
-      ) {
-        throw new CustomError(
-          HttpStatus.BAD_REQUEST,
-          Messages.tooManyPasswordResetRequest,
-        );
-      }
-      token = isTokenAlreadyCreated.token;
-      isTokenAlreadyCreated.count++;
-      await isTokenAlreadyCreated.save();
-    } else {
-      const tokenExpireTime = moment()
-        .add(this.forgetPasswordMinutes, 'm')
-        .toDate();
-      token = encryptData(
-        {
-          userId: user.id,
-        },
-        this.forgetPasswordMinutes + 'm',
-      );
+      this.forgetPasswordMinutes + 'm',
+    );
 
-      const securityToken = new SecurityTokens({
-        userId: user.id,
-        expiresAt: tokenExpireTime,
-        count: 1,
-        token,
-      });
-      await securityToken.save();
-    }
+    const securityToken = new SecurityTokens({
+      userId: user.id,
+      expiresAt: tokenExpireTime,
+      count: 1,
+      token,
+    });
+    await securityToken.save();
     const link = forgetPasswordUrl(token);
     const emailData: EmailDTO = {
       to: [user.email],

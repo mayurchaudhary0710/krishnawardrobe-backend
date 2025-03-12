@@ -7,7 +7,7 @@ import * as crypto from 'crypto';
 type FileMoves = Record<string, any>;
 @Injectable()
 export class FileService {
-  constructor() { }
+  constructor() {}
 
   async uploadFile(file: Express.Multer.File, FOLDER_NAME: string) {
     if (!file)

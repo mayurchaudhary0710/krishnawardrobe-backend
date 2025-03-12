@@ -1,4 +1,4 @@
-import { ROLE } from '@constants';
+import { ROLE } from '../constants/enums';
 import { QueryInterface } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,7 +11,7 @@ export const up = async ({ context }: { context: QueryInterface }) => {
         password:
           '$2a$10$59vTQ0guSC4TvRfp8X/nPeF3eIsuCUu3ncPwvyJOm6TFpbczofZUq',
         name: 'Sanjay',
-        phoneNumber: '',
+        phoneNumber: '6942069420',
         roleName: ROLE.ADMIN,
         createdAt: new Date(),
       },
@@ -21,7 +21,7 @@ export const up = async ({ context }: { context: QueryInterface }) => {
         password:
           '$2a$10$59vTQ0guSC4TvRfp8X/nPeF3eIsuCUu3ncPwvyJOm6TFpbczofZUq',
         name: 'Mayur',
-        phoneNumber: '',
+        phoneNumber: '8000819519',
         roleName: ROLE.ADMIN,
         createdAt: new Date(),
       },

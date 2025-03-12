@@ -15,7 +15,7 @@ export class ActiveUserGuard implements CanActivate {
   constructor(
     @Inject(AuthService)
     private authService: AuthService,
-  ) { }
+  ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
       const req = context.switchToHttp().getRequest();

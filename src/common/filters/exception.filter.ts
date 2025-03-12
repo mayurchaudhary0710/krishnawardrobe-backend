@@ -14,8 +14,8 @@ export class ExceptionHandler implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
     let message = exception.message;
-    console.log("inside exception")
-    console.log(exception)
+    console.log('inside exception');
+    console.log(exception);
     if (exception instanceof z.ZodError) {
       message = (exception as any)?.response?.message?.join(', ');
     }

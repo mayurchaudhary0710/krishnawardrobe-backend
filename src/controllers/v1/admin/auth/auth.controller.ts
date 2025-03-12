@@ -23,7 +23,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from 'src/constants/cookies.constants';
 import { ENV } from '@config';
 @Controller('admin/auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
   async verifyOtp(
@@ -66,7 +66,7 @@ export class AuthController {
         data: refreshTokenData,
       });
     } catch (error) {
-      console.log("error Controller ", error)
+      console.log('error Controller ', error);
       handleError(res, error);
     }
   }

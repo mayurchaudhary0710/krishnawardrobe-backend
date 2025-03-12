@@ -26,7 +26,7 @@ export class OffersMobileController {
     private readonly offerService: OfferMobileService,
     @InjectConnection()
     private readonly _sequelize: Sequelize,
-  ) { }
+  ) {}
 
   @Get()
   async getCurrentOffers(

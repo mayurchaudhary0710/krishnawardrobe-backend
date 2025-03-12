@@ -19,7 +19,7 @@ import { MulterModule } from '@nestjs/platform-express';
       serveRoot: '/public',
     }),
     MulterModule.register({
-      dest: '../uploads'
+      dest: '../uploads',
     }),
     DBModule,
     Modules,
@@ -35,7 +35,10 @@ export class AppModule implements NestModule {
     const logDirectory = path.join(__dirname, '..', 'logs');
     fs.mkdirSync(logDirectory, { recursive: true });
 
-    const logFilePath = path.join(logDirectory, `${new Date().toISOString().slice(0, 10)}.log`);
+    const logFilePath = path.join(
+      logDirectory,
+      `${new Date().toISOString().slice(0, 10)}.log`,
+    );
     const accessLogStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 
     // Custom Morgan Token
@@ -53,4 +56,3 @@ export class AppModule implements NestModule {
       .forRoutes('*');
   }
 }
-

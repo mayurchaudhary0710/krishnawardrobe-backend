@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { ACCEPTED_FIELDS } from '@constants';
-import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
 import { handleError } from '@utils';
 import { AuthGuard } from '@guards';
 import * as crypto from 'crypto';
@@ -20,7 +23,7 @@ import path from 'path';
 @UseGuards(AuthGuard)
 @Controller('files')
 export class FileController {
-  constructor(private readonly fileService: FileService) { }
+  constructor(private readonly fileService: FileService) {}
 
   @Post('upload')
   @UseInterceptors(FileFieldsInterceptor(ACCEPTED_FIELDS))
