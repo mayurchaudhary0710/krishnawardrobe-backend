@@ -9,7 +9,7 @@ export const up = async ({ context }: { context: QueryInterface }) => {
         id: uuidv4(),
         email: 'sanjaynagar071@gmail.com',
         password:
-          '$2a$10$59vTQ0guSC4TvRfp8X/nPeF3eIsuCUu3ncPwvyJOm6TFpbczofZUq',
+          '$2a$10$gNe.TSB3zgsbvFaykYsDgOg7nE7GTTTyAgeLon1.Lyu.UsTsla7de',
         name: 'Sanjay',
         phoneNumber: '6942069420',
         roleName: ROLE.ADMIN,
@@ -18,10 +18,9 @@ export const up = async ({ context }: { context: QueryInterface }) => {
       {
         id: uuidv4(),
         email: 'mayur@gmail.com',
-        password:
-          '$2a$10$59vTQ0guSC4TvRfp8X/nPeF3eIsuCUu3ncPwvyJOm6TFpbczofZUq',
+        password: '$2a$10$gNe.TSB3zgsbvFaykYsDgOg7nE7GTTTyAgeLon1.Lyu.UsTsla7de',
         name: 'Mayur',
-        phoneNumber: '8000819519',
+        phoneNumber: '',
         roleName: ROLE.ADMIN,
         createdAt: new Date(),
       },
