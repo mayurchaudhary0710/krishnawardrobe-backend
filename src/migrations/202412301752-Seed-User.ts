@@ -18,7 +18,8 @@ export const up = async ({ context }: { context: QueryInterface }) => {
       {
         id: uuidv4(),
         email: 'mayur@gmail.com',
-        password: '$2a$10$gNe.TSB3zgsbvFaykYsDgOg7nE7GTTTyAgeLon1.Lyu.UsTsla7de',
+        password:
+          '$2a$10$gNe.TSB3zgsbvFaykYsDgOg7nE7GTTTyAgeLon1.Lyu.UsTsla7de',
         name: 'Mayur',
         phoneNumber: '',
         roleName: ROLE.ADMIN,

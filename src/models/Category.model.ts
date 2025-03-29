@@ -10,7 +10,6 @@ import {
 } from 'sequelize-typescript';
 
 @Table({ tableName: 'categories', timestamps: true })
-
 export class Category extends Model<Category> {
   @Column({
     type: DataType.UUID,

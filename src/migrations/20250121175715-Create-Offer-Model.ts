@@ -1,4 +1,8 @@
-import { OFFERDISCOUNTTYPES, OFFERSTATUS, OFFERTYPES } from '../constants/enums';
+import {
+  OFFERDISCOUNTTYPES,
+  OFFERSTATUS,
+  OFFERTYPES,
+} from '../constants/enums';
 import { DataTypes, QueryInterface } from 'sequelize';
 
 export const up = async ({ context }: { context: QueryInterface }) => {

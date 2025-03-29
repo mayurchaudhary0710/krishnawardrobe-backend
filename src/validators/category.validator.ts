@@ -1,16 +1,12 @@
 import { z } from 'zod';
 
 const createCategorySchema = z.object({
-  categoryName: z
-    .string()
-    .min(1, 'Category name is required')
+  id: z.string().nullable(),
+  categoryName: z.string().min(1, 'Category name is required'),
 });
 
 const updateCategorySchema = z.object({
-  categoryName: z
-    .string()
-    .min(1, 'Category name is required')
-    .optional(),
+  categoryName: z.string().min(1, 'Category name is required').optional(),
 });
 
 const deleteCategorySchema = z.object({
@@ -26,16 +22,24 @@ const getAllCategoriesSchema = z.object({
 
   categoryName: z.string().optional(),
 
-  createdAtFrom: z.preprocess(
-    (val) =>
-      typeof val === 'string' || typeof val === 'number' ? new Date(val) : val,
-    z.date()
-  ).optional(),
-  createdAtTo: z.preprocess(
-    (val) =>
-      typeof val === 'string' || typeof val === 'number' ? new Date(val) : val,
-    z.date()
-  ).optional(),
+  createdAtFrom: z
+    .preprocess(
+      (val) =>
+        typeof val === 'string' || typeof val === 'number'
+          ? new Date(val)
+          : val,
+      z.date(),
+    )
+    .optional(),
+  createdAtTo: z
+    .preprocess(
+      (val) =>
+        typeof val === 'string' || typeof val === 'number'
+          ? new Date(val)
+          : val,
+      z.date(),
+    )
+    .optional(),
 
   // Pagination
   limit: z.coerce.number().int().optional().default(10),
@@ -57,5 +61,5 @@ export {
   CreateCategoryDTO,
   GetAllCategoriesQueryParams,
   getAllCategoriesSchema,
-  GetAllCategoriesDto
+  GetAllCategoriesDto,
 };

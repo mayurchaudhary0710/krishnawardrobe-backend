@@ -1,5 +1,17 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
-import { CreateCategoryDTO, UpdateCategoryDTO, DeleteCategoryDTO, GetAllCategoriesDto } from '@validators';
+import { Messages } from '@constants';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+  HttpStatus,
+} from '@nestjs/common';
+import { CustomError } from '@utils';
+import {
+  CreateCategoryDTO,
+  UpdateCategoryDTO,
+  DeleteCategoryDTO,
+  GetAllCategoriesDto,
+} from '@validators';
 import { literal, Op } from 'sequelize';
 import { Category } from 'src/models/Category.model';
 
@@ -10,9 +22,9 @@ export class CategoryService {
   async createCategory(dto: CreateCategoryDTO) {
     const isCategoryExists = await Category.findOne({
       where: {
-        categoryName: dto.categoryName.toLowerCase().replace(/\s+/g, '')
-      }
-    })
+        categoryName: dto.categoryName.toLowerCase().replace(/\s+/g, ''),
+      },
+    });
     if (isCategoryExists) {
       throw new BadRequestException('Category name already exists');
     }
@@ -21,11 +33,14 @@ export class CategoryService {
 
   async updateCategory(id: string, dto: UpdateCategoryDTO) {
     const category = await Category.findByPk(id);
-    if (!category || category?.isDeleted) throw new NotFoundException('Category not found');
+    if (!category || category?.isDeleted)
+      throw new NotFoundException('Category not found');
 
     if (dto?.categoryName) {
       const existingCategory = await Category.findOne({
-        where: { categoryName: dto.categoryName.toLowerCase().replace(/\s/g, '') },
+        where: {
+          categoryName: dto.categoryName.toLowerCase().replace(/\s/g, ''),
+        },
       });
 
       if (existingCategory && existingCategory.id !== id) {
@@ -52,7 +67,6 @@ export class CategoryService {
     return { message: 'Category deleted successfully' };
   }
 
-
   async getAllCategories(query: GetAllCategoriesDto) {
     const {
       search,
@@ -66,7 +80,7 @@ export class CategoryService {
     } = query;
 
     let where: any = {};
-    const andCondition: any = []
+    const andCondition: any = [];
     // If a general search is provided, apply it on categoryName (like condition)
     if (search) {
       // Note: If you want to combine this with an exact categoryName filter,
@@ -76,8 +90,8 @@ export class CategoryService {
           { categoryName: { [Op.iLike]: `%${search}%` } },
           literal(`CAST("id" AS TEXT) ILIKE '%${search}%'`),
           literal(`CAST("categoryNumber" AS TEXT) ILIKE '%${search}%'`),
-        ]
-      }
+        ],
+      };
     }
 
     // Apply individual column filters
@@ -85,15 +99,17 @@ export class CategoryService {
       andCondition.push(literal(`CAST("id" AS TEXT) ILIKE '%${id}%'`));
     }
     if (categoryNumber) {
-      andCondition.push(literal(`CAST("categoryNumber" AS TEXT) ILIKE '%${categoryNumber}%'`));
+      andCondition.push(
+        literal(`CAST("categoryNumber" AS TEXT) ILIKE '%${categoryNumber}%'`),
+      );
     }
 
     if (categoryName) {
       // This is an exact match filter for categoryName
       where.categoryName = {
-        [Op.iLike]: `%${categoryName}%`
-      }
-    };
+        [Op.iLike]: `%${categoryName}%`,
+      };
+    }
 
     // Process createdAt date filters
     if (createdAtFrom && createdAtTo) {
@@ -105,7 +121,7 @@ export class CategoryService {
     }
 
     if (andCondition.length) {
-      where[Op.and] = andCondition
+      where[Op.and] = andCondition;
     }
     // Fetch records with pagination; if limit is -1, do not limit the query.
     const categories = await Category.findAll({
@@ -116,6 +132,34 @@ export class CategoryService {
 
     return categories;
   }
+
+  async createBulkCategories(categories: CreateCategoryDTO[]) {
+    const duplicateCategories = await Category.findAll({
+      where: {
+        categoryName: categories.map((cat) =>
+          cat.categoryName.toLowerCase().replace(/\s+/g, ''),
+        ),
+      },
+      attributes: ['categoryName'],
+    });
+    if (duplicateCategories.length) {
+      throw new CustomError(
+        HttpStatus.BAD_REQUEST,
+        `Categories ${duplicateCategories.map((_) => _.categoryName).join(' ')} ` +
+        Messages.recordAlreadyExist,
+      );
+    }
+
+    const bulkCategories = categories.map(({ id, categoryName }) => {
+      return {
+        ...(!!id ? { id } : {}),
+        categoryName
+      }
+    })
+    console.log(bulkCategories)
+    const bulkCreatedCategories = await Category.bulkCreate(bulkCategories, {
+      updateOnDuplicate: ["categoryName"]
+    })
+    return bulkCreatedCategories
+  }
 }
-
-

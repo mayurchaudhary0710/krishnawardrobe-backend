@@ -46,4 +46,4 @@ const database = ENV.DB.DATABASE;
     }),
   ],
 })
-export class DBModule { }
+export class DBModule {}

@@ -24,12 +24,12 @@ export const up = async ({ context }: { context: QueryInterface }) => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
     },
   });
 };

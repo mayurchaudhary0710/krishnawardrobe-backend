@@ -30,7 +30,7 @@ import { forgetPasswordUrl } from 'src/constants/auth.constant';
 export class AuthService {
   private forgetPasswordMinutes = ENV.FORGOT_PASSWORD_EXPIRES_IN_MINUTES ?? 10;
   private maxResetPasswordRequest = 3;
-  constructor() { }
+  constructor() {}
   async verifyAdminAndLogin({ email, password }: IAdminLoginDTO) {
     const user = await User.findOne({
       where: {
