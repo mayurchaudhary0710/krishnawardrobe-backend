@@ -1,9 +1,9 @@
 import { config } from 'dotenv';
 import * as path from 'path';
 function initConfig() {
-  const env = process.env.NODE_ENV || 'dev'; // Default to "development" if not set
+  const env = process.env.NODE_ENV || 'dev'; 
   const envFile = env === 'prod' ? '.env' : `.env.${env}`;
-  const envPath = path.resolve(__dirname, '../../../', envFile); // Adjust path as needed
+  const envPath = path.resolve(process.cwd(), envFile); 
 
   console.log(`Loading environment variables from: ${envPath}`);
   config({ path: envPath });

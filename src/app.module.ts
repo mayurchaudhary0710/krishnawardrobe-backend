@@ -15,7 +15,7 @@ import { MulterModule } from '@nestjs/platform-express';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, '../public'),
+      rootPath: path.join(process.cwd(),'public'),
       serveRoot: '/public',
     }),
     MulterModule.register({
@@ -32,7 +32,7 @@ import { MulterModule } from '@nestjs/platform-express';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    const logDirectory = path.join(__dirname, '..', 'logs');
+    const logDirectory = path.join(process.cwd(), 'logs');
     fs.mkdirSync(logDirectory, { recursive: true });
 
     const logFilePath = path.join(

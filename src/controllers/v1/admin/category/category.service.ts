@@ -156,7 +156,6 @@ export class CategoryService {
         categoryName
       }
     })
-    console.log(bulkCategories)
     const bulkCreatedCategories = await Category.bulkCreate(bulkCategories, {
       updateOnDuplicate: ["categoryName"]
     })
